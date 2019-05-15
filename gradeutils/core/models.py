@@ -58,9 +58,10 @@ class Student(models.Model):
                     .filter(trimester__code__lte=max_trimester)
                     .order_by('trimester__code'))
 
-    def cumulative_grade_point_average(self, trimester: int = None) -> Decimal:
-        """CGPA of the enrolled student (out of 4) in a specified trimester."""
-        courses: Iterable[Course] = self.course_list(max_trimester=trimester)
+    @property
+    def cumulative_grade_point_average(self) -> Decimal:
+        """CGPA of the enrolled student (out of 4)."""
+        courses: Iterable[Course] = self.course_list()
         cgpa_numerator = sum([
             course.credits * course.grade_point
             for course in courses
@@ -79,9 +80,10 @@ class Student(models.Model):
         )
         return qdecimal(cgpa)
 
-    def cgpa(self, trimester: int = None) -> Decimal:
+    @property
+    def cgpa(self) -> Decimal:
         """Alias of cumulative_grade_point_average."""
-        return self.cumulative_grade_point_average(trimester=trimester)
+        return self.cumulative_grade_point_average
 
 
 class Trimester(models.Model):

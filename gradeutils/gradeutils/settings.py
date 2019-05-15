@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd party apps
+    'nested_admin',
+
     # this project's apps
     'core.apps.CoreConfig',
 ]

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # 3rd party apps
     'nested_admin',
+    'crispy_forms',
 
     # this project's apps
     'core.apps.CoreConfig',
@@ -101,6 +102,10 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+# 3rd party settings ----------------------------------------------------------
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # -----------------------------------------------------------------------------
 

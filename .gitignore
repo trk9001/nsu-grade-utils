@@ -117,3 +117,6 @@ dmypy.json
 
 # PyCharm project settings
 .idea/
+
+# Static files
+static/

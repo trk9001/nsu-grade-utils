@@ -3,6 +3,7 @@ from typing import Iterable, Union
 
 from django.core.validators import RegexValidator
 from django.db import models
+from django.utils.text import slugify
 
 
 def qdecimal(value: Union[int, float, Decimal, str],
@@ -35,6 +36,11 @@ class Student(models.Model):
         max_length=5,
         choices=PROGRAM_CHOICES,
     )
+    slug = models.SlugField(
+        max_length=13,  # See slug creation in the save method
+        editable=False,
+        unique=True,
+    )
 
     class Meta:
         ordering = ['nsuid']
@@ -47,6 +53,10 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.nsuid}, {self.get_program_display()}'
+
+    def save(self, *args, **kwargs):
+        self.slug = self.slug or slugify(f'{self.nsuid} {self.program}')
+        super().save(*args, **kwargs)
 
     def course_list(self, max_trimester: int = None) -> models.QuerySet:
         """Flattened queryset of courses taken by the enrolled student."""

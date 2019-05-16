@@ -5,9 +5,12 @@
 {% block heading %}Students{% endblock %}
 
 {% block content %}
-<ul>
-{% for student in student_list %}
-  <li>{{ student }}</li>
-{% endfor %}
-</ul>
+  <ul>
+  {% for student in student_list %}
+    <li>{{ student }}</li>
+  {% endfor %}
+  </ul>
+  <a href="{% url 'student-create' %}">
+    <button type="button" class="btn btn-primary">New</button>
+  </a>
 {% endblock %}

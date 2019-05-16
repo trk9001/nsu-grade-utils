@@ -8,4 +8,9 @@ urlpatterns = [
         views.StudentList.as_view(),
         name='student-list',
     ),
+    path(
+        'students/new/',
+        views.StudentCreate.as_view(),
+        name='student-create',
+    ),
 ]

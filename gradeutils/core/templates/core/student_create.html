@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}New Student{% endblock %}
+
+{% block heading %}New Student{% endblock %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <ul>
+      {{ form|crispy }}
+    </ul>
+  <button type="submit" class="btn btn-success">Save</button>
+  </form>
+{% endblock %}

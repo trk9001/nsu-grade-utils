@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
-# Create your views here.
+from . import models
+
+
+class StudentList(ListView):
+    """Render a list of Student references."""
+
+    model = models.Student
+    template_name = 'core/student_list.html'

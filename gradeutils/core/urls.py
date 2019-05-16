@@ -13,4 +13,9 @@ urlpatterns = [
         views.StudentCreate.as_view(),
         name='student-create',
     ),
+    path(
+        'students/<slug:slug>/',
+        views.StudentDetail.as_view(),
+        name='student-detail',
+    ),
 ]

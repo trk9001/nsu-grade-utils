@@ -18,3 +18,10 @@ class StudentCreate(generic.CreateView):
     fields = ['nsuid', 'program']
     template_name = 'core/student_create.html'
     success_url = reverse_lazy('student-list')
+
+
+class StudentDetail(generic.DetailView):
+    """Render the details of a Student."""
+
+    model = models.Student
+    template_name = 'core/student_detail.html'

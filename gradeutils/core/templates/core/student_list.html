@@ -7,7 +7,9 @@
 {% block content %}
   <ul>
   {% for student in student_list %}
-    <li>{{ student }}</li>
+    <li>
+      <a href="{% url 'student-detail' student.slug %}">{{ student }}</a>
+    </li>
   {% endfor %}
   </ul>
   <a href="{% url 'student-create' %}">

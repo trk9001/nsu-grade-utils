@@ -1,17 +1,17 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views import generic
 
 from . import models
 
 
-class StudentList(ListView):
+class StudentList(generic.ListView):
     """Render a list of Student references."""
 
     model = models.Student
     template_name = 'core/student_list.html'
 
 
-class StudentCreate(CreateView):
+class StudentCreate(generic.CreateView):
     """Render a form for a Student's creation."""
 
     model = models.Student

@@ -1,8 +1,14 @@
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('nested_admin/', include('nested_admin.urls')),
     path('', include('core.urls')),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)

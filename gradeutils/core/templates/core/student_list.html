@@ -5,14 +5,16 @@
 {% block heading %}Students{% endblock %}
 
 {% block content %}
+  <p>
+    <a href="{% url 'student-create' %}">
+      <button type="button" class="btn btn-primary">Add New Student</button>
+    </a>
+  </p>
   <ul>
   {% for student in student_list %}
     <li>
-      <a href="{{ student.get_absolute_url }}">{{ student }}</a>
+      <a href="{{ student.get_absolute_url }}">{{ student.nsuid }} ({{ student.get_program_display }})</a>
     </li>
   {% endfor %}
   </ul>
-  <a href="{% url 'student-create' %}">
-    <button type="button" class="btn btn-primary">New</button>
-  </a>
 {% endblock %}

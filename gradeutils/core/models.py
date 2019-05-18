@@ -3,6 +3,7 @@ from typing import Iterable, Union
 
 from django.core.validators import RegexValidator
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -57,6 +58,9 @@ class Student(models.Model):
     def save(self, *args, **kwargs):
         self.slug = self.slug or slugify(f'{self.nsuid} {self.program}')
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('student-detail', kwargs={'slug': self.slug})
 
     def course_list(self, max_trimester: int = None) -> models.QuerySet:
         """Flattened queryset of courses taken by the enrolled student."""

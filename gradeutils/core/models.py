@@ -53,7 +53,7 @@ class Student(models.Model):
         ]
 
     def __str__(self):
-        return f'{self.nsuid}, {self.get_program_display()}'
+        return f'{self.nsuid} ({self.program})'
 
     def save(self, *args, **kwargs):
         self.slug = self.slug or slugify(f'{self.nsuid} {self.program}')

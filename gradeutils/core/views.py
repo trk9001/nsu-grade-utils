@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views import generic
 
-from . import models
+from . import forms, models
 
 
 class Index(generic.RedirectView):
@@ -31,3 +31,11 @@ class StudentDetail(generic.DetailView):
 
     model = models.Student
     template_name = 'core/student_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        student = self.get_object()
+        data = {'student': student}
+        trimester_form = forms.TrimesterCreateForm(initial=data)
+        context['trimester_form'] = trimester_form
+        return context

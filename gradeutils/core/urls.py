@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns = [
     path(
+        '',
+        views.Index.as_view(),
+        name='index',
+    ),
+    path(
         'students/',
         views.StudentList.as_view(),
         name='student-list',

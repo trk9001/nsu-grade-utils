@@ -4,6 +4,12 @@ from django.views import generic
 from . import models
 
 
+class Index(generic.RedirectView):
+    """Redirect Index view to StudentList view."""
+
+    pattern_name = 'student-list'
+
+
 class StudentList(generic.ListView):
     """Render a list of Student references."""
 

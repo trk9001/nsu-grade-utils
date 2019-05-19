@@ -1,5 +1,30 @@
 {% extends 'core/base.html' %}
 
-{% block title %}{{ student }}{% endblock %}
+{% block title %}Student Info{% endblock %}
 
-{% block heading %}{{ student }}{% endblock %}
+{% block heading %}Student Info{% endblock %}
+
+{% block content %}
+  <p>ID: {{ student.nsuid }}</p>
+  <p>Program: {{ student.program }}</p>
+  <p>CGPA: {{ student.cgpa }}</p>
+  <hr>
+
+  <h2>Trimester Record</h2>
+  <p>
+    <form action="#" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="student-slug" value="{{ student.slug }}">
+      <button type="submit" class="btn btn-primary">Add Next Trimester</button>
+    </form>
+  </p>
+  <p>
+    <ul>
+    {% for trimester in student.trimesters.all %}
+      <li>
+        <a href="#">{{ trimester.code }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </p>
+{% endblock %}

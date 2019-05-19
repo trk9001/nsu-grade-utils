@@ -1,6 +1,8 @@
+import datetime as dt
 from decimal import Decimal
 from typing import Iterable, Union
 
+from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
@@ -29,9 +31,9 @@ class Student(models.Model):
         max_length=7,
         verbose_name='NSU ID',
         help_text='<em>The first seven digits of your student ID</em>',
-        validators=(
+        validators=[
             RegexValidator(r'^\d{7}$', message='Should be a 7-digit number'),
-        ),
+        ],
     )
     program = models.CharField(
         max_length=5,
@@ -100,6 +102,17 @@ class Student(models.Model):
         return self.cumulative_grade_point_average
 
 
+def validate_trimester_code(value: int):
+    val = str(value)
+    if len(val) != 3:
+        raise ValidationError('Trimester code must a 3-digit number')
+    if val[-1] not in '123':
+        raise ValidationError('Invalid trimester number')
+    yy = int(val[:2])
+    if yy > int(dt.date.today().strftime('%y')):
+        raise ValidationError('Invalid trimester year')
+
+
 class Trimester(models.Model):
     """A trimester completed by an enrolled student."""
 
@@ -112,6 +125,9 @@ class Trimester(models.Model):
     code = models.PositiveSmallIntegerField(
         help_text='<em>The numerical code of the trimester '
                   '(eg. 152 for the Summer 2015 trimester)</em>',
+        validators=[
+            validate_trimester_code,
+        ],
     )
 
     class Meta:

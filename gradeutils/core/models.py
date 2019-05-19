@@ -81,13 +81,13 @@ class Student(models.Model):
             for course in courses
             if not course.retaken
             and course.grade_point
-        ])
+        ], qdecimal(0))
         cgpa_denominator = sum([
             course.credits
             for course in courses
             if not course.retaken
             and course.grade_point
-        ])
+        ], qdecimal(0))
         cgpa = (
             0 if cgpa_denominator.is_zero()
             else cgpa_numerator / cgpa_denominator
@@ -133,12 +133,12 @@ class Trimester(models.Model):
             course.credits * course.grade_point
             for course in self.courses
             if course.grade_point
-        ])
+        ], qdecimal(0))
         gpa_denominator = sum([
             course.credits
             for course in self.courses
             if course.grade_point
-        ])
+        ], qdecimal(0))
         gpa = (
             0 if gpa_denominator.is_zero()
             else gpa_numerator / gpa_denominator

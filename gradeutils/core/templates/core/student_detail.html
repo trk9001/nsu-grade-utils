@@ -11,12 +11,15 @@
   <hr>
 
   <h2>Trimester Record</h2>
-  <p>
-    <form action="#" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="student-slug" value="{{ student.slug }}">
-      <button type="submit" class="btn btn-primary">Add Next Trimester</button>
-    </form>
+  <hr>
+  <p style="display: inline;">
+  {% if next_trimester_code %}
+    <button class="btn btn-primary" data-toggle="modal" data-target="#add-next-trimester">Add Next Trimester</button>
+    {% include 'core/modal_trimester_create_next.html' %}
+  {% else %}
+    <button class="btn btn-primary" data-toggle="modal" data-target="#add-trimester">Add First Trimester</button>
+    {% include 'core/modal_trimester_create.html' %}
+  {% endif %}
   </p>
   <p>
     <ul>

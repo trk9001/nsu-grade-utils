@@ -1,5 +1,5 @@
 {% load crispy_forms_tags %}
-<div id="add-trimester" class="modal fade" role="dialog" tabindex="-1">
+<div id="add-first-trimester" class="modal fade" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,8 +14,9 @@
           {{ trimester_form|crispy }}
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <input type="hidden" name="action-type" value="add-first-trimester">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </div>
       </form>
     </div>

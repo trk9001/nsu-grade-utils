@@ -14,6 +14,8 @@
         <form action="#" method="post">
           {% csrf_token %}
           <input type="hidden" name="student-slug" value="{{ student.slug }}">
+          <input type="hidden" name="next_trimester_code" value="{{ next_trimester_code }}">
+          <input type="hidden" name="action-type" value="add-next-trimester">
           <button type="submit" class="btn btn-primary">Add</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </form>

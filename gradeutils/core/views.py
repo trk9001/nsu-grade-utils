@@ -1,3 +1,4 @@
+from django.db.models import Max
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -35,6 +36,20 @@ class StudentDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         student = self.get_object()
+        last_trimester_code = (
+            student.trimesters
+            .aggregate(last_trimester_code=Max('code'))
+            .get('last_trimester_code', None)
+        )
+        if last_trimester_code:
+            next_trimester_code = (
+                last_trimester_code + 1
+                if last_trimester_code % 10 < 3
+                else (last_trimester_code // 10) * 10 + 1
+            )
+        else:
+            next_trimester_code = None
+        context['next_trimester_code'] = next_trimester_code
         data = {'student': student}
         trimester_form = forms.TrimesterCreateForm(initial=data)
         context['trimester_form'] = trimester_form

@@ -45,7 +45,7 @@ class StudentDetail(generic.DetailView):
             next_trimester_code = (
                 last_trimester_code + 1
                 if last_trimester_code % 10 < 3
-                else (last_trimester_code // 10) * 10 + 1
+                else (last_trimester_code // 10 + 1) * 10 + 1
             )
         else:
             next_trimester_code = None

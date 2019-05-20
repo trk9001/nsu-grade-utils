@@ -23,4 +23,9 @@ urlpatterns = [
         views.StudentDetail.as_view(),
         name='student-detail',
     ),
+    path(
+        'students/<slug:slug>/new-trimester/',
+        views.TrimesterCreate.as_view(),
+        name='trimester-create',
+    ),
 ]

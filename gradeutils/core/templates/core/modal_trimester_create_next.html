@@ -11,7 +11,7 @@
         <p>Add {{ next_trimester_code }} as the next trimester?</p>
       </div>
       <div class="modal-footer">
-        <form action="#" method="post">
+        <form action="{% url 'trimester-create' student.slug %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="student-slug" value="{{ student.slug }}">
           <input type="hidden" name="next_trimester_code" value="{{ next_trimester_code }}">

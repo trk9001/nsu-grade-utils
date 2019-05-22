@@ -5,14 +5,30 @@
 {% block heading %}Student Info{% endblock %}
 
 {% block content %}
-  <p>ID: {{ student.nsuid }}</p>
-  <p>Program: {{ student.program }}</p>
-  <p>CGPA: {{ student.cgpa }}</p>
-  <hr>
+  <div class="card border-0">
+    <div class="card-body">
+      <table class="table table-bordered table-striped">
+        <tbody>
+        <tr>
+          <th scope="row">NSU ID</th>
+          <td>{{ student.nsuid }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Program</th>
+          <td>{{ student.program }}</td>
+        </tr>
+        <tr>
+          <th scope="row">CGPA</th>
+          <td>{{ student.cgpa }}</td>  {# TODO: Add spoiler styling #}
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   <h2>Trimester Record</h2>
   <hr>
-  <p>
+  <div class="btn-group">
   {% if next_trimester_code %}
     <button class="btn btn-primary" data-toggle="modal" data-target="#add-next-trimester">Add Next Trimester</button>
     {% include 'core/modal_trimester_create_next.html' %}
@@ -20,8 +36,8 @@
     <button class="btn btn-primary" data-toggle="modal" data-target="#add-first-trimester">Add First Trimester</button>
     {% include 'core/modal_trimester_create.html' %}
   {% endif %}
-  </p>
-  <p>
+  </div>
+  <div class="">
     <ul>
     {% for trimester in student.trimesters.all %}
       <li>
@@ -29,5 +45,5 @@
       </li>
     {% endfor %}
     </ul>
-  </p>
+  </div>
 {% endblock %}
